@@ -3,6 +3,8 @@ package com.miszio.mvnselenium;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collections;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,12 +17,16 @@ public class Login {
 	@BeforeTest
 	public void setup(){
 		ChromeOptions options = new ChromeOptions();
+		options.setBinary("/usr/bin/google-chrome-stable");
 		options.addArguments("start-maximized"); // open Browser in maximized mode
-		options.addArguments("disable-infobars"); // disabling infobars
-		options.addArguments("--disable-extensions"); // disabling extensions
-		options.addArguments("--disable-gpu"); // applicable to windows os only
-		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-		options.addArguments("--no-sandbox"); // Bypass OS security model
+		// options.addArguments("disable-infobars"); // disabling infobars
+		// options.addArguments("--disable-extensions"); // disabling extensions
+		// options.addArguments("--disable-gpu"); // applicable to windows os only
+		// options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+		// options.addArguments("--headless");
+		// options.addArguments("--no-sandbox"); // Bypass OS security model
+		options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+		options.setExperimentalOption("useAutomationExtension", false);
 		driver = new ChromeDriver(options);
 	}
 	@Test
